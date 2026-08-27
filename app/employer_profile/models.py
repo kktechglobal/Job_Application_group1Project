@@ -23,12 +23,25 @@ if TYPE_CHECKING:
 class employer_Profile(Base):
     __tablename__ = "employer_profiles"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(Integer(100), primary_key=True, index=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), unique=True)
-    company_name: Mapped[str] = mapped_column(String, nullable=False)
-    company_description: Mapped[Optional[str]] = mapped_column(string(500), nullable=True)
-    is_verified: Mapped[bool] = mapped_column(Boolean, default=False)
-    verification_documents: Mapped[Optional[str]] = mapped_column(String)
 
+    company_name: Mapped[str] = mapped_column(String(200), nullable=False)
+    company_description: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
+
+    about: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
+
+    banner_image_url: Mapped[Optional[str]] = mapped_column(String(200), nullable=True)
+    logo_url: Mapped[Optional[str]] = mapped_column(String(200), nullable=True)
+
+    is_verified: Mapped[bool] = mapped_column(Boolean, default=False)
+    
+    save_and_next: Mapped[Optional[str]] = mapped_column(String(200), nullable=True)
+
+
+    #relationship
     user: Mapped["user"] = relationship( back_populates="employer_profile")
     jobs: Mapped[list["job_post"]] = relationship( back_populates="employer")
+
+
+
