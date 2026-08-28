@@ -19,10 +19,13 @@ if TYPE_CHECKING:
 class Interview(Base):
     __tablename__ = "interviews"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(Integer(100), primary_key=True, index=True)
     application_id: Mapped[int] = mapped_column(ForeignKey("applications.id"), unique=True)
     scheduled_time: Mapped[datetime] = mapped_column(DateTime, nullable=False)
-    meeting_link: Mapped[str] = mapped_column(String, nullable=False)
-    notes: Mapped[Optional[str]] = mapped_column(string(200), nullable=True)
+    meeting_link: Mapped[str] = mapped_column(String(200), nullable=False)
+    notes: Mapped[Optional[str]] = mapped_column(String(200), nullable=True)
+
+
+    #relationship
 
     application: Mapped["application"] = relationship(back_populates="interview")

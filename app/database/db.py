@@ -4,8 +4,9 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, Asyn
 
 from app.database.base import Base
 
+DATABASE_URL = "postgresql+asyncpg://postgres:Jombull123@localhost:5432/group_project"
 # ---------------------------------------------------------------------------
-DATABASE_URL = "postgresql+asyncpg://username:password@localhost:5432/my_app"
+
 
 
 engine = create_async_engine(DATABASE_URL, echo=True)
